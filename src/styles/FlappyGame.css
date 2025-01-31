@@ -30,7 +30,14 @@
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  aspect-ratio: 4/3;
+  @media (max-width: 768px) {
+    aspect-ratio: 2/3;
+    height: 80vh;
+    max-height: 800px;
+  }
+  @media (min-width: 769px) {
+    aspect-ratio: 4/3;
+  }
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
@@ -39,6 +46,8 @@
   cursor: pointer;
   user-select: none;
   background: #4A2618;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .flappy-game-canvas {

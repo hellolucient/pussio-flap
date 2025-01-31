@@ -71,8 +71,8 @@ export default function Home() {
         </section>
 
         {/* Game Section - flex-grow to fill available space */}
-        <section className="flex-grow py-4 md:py-6">
-          <div className="max-w-4xl mx-auto px-4 h-full flex flex-col">
+        <section className="flex-grow py-2 md:py-6 px-2 md:px-4">
+          <div className="max-w-4xl mx-auto h-full flex flex-col">
             <FlappyGame />
           </div>
         </section>
