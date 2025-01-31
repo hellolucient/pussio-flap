@@ -699,6 +699,9 @@ const FlappyGame: React.FC = () => {
         ref={canvasRef}
         className="flappy-game-canvas"
       />
+      <div className="jump-text">
+        Click to Jump
+      </div>
     </div>
   );
 };
