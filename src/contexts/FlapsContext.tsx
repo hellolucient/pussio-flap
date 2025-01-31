@@ -9,7 +9,9 @@ interface FlapsContextType {
 
 const FlapsContext = createContext<FlapsContextType>({
   flapsBalance: 0,
-  addFlaps: () => {},
+  addFlaps: (amount: number) => {
+    console.log('Default addFlaps called with:', amount)
+  },
 })
 
 export function FlapsProvider({ children }: { children: React.ReactNode }) {
