@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from 'react';
-import { useWallet } from '@/contexts/WalletContext';
 import { useFlaps } from '@/contexts/FlapsContext';
 
 interface GameState {
@@ -55,7 +54,6 @@ const SECOND_PROMO_START = 7;  // Show after 7th obstacle
 const SECOND_PROMO_END = 11;   // Hide after 11th obstacle
 
 const FlappyGame: React.FC = () => {
-  const { wallet } = useWallet();
   const { flapsBalance, addFlaps } = useFlaps();
   const [totalFlaps, setTotalFlaps] = useState(flapsBalance);
   const totalFlapsRef = useRef(flapsBalance);  // Add this ref to track total
@@ -119,21 +117,13 @@ const FlappyGame: React.FC = () => {
       e.preventDefault();
     }
     
-    if (!wallet?.publicKey) {
-      console.log('Wallet not connected or no public key!');
-      return;
-    }
-    
-    console.log('handleFlap called, gameStarted:', gameState.current.isStarted);
-
     if (!gameState.current.isStarted) {
       console.log('Starting game...');
       startGame();
     } else {
       console.log('Flapping...');
-      // Play purr sound
       if (purrSoundRef.current) {
-        purrSoundRef.current.currentTime = 0; // Reset sound to start
+        purrSoundRef.current.currentTime = 0;
         purrSoundRef.current.play();
         isPurringRef.current = true;
       }
@@ -159,10 +149,7 @@ const FlappyGame: React.FC = () => {
     // Handle canvas click
     const handleCanvasClick = (e: MouseEvent) => {
       e.preventDefault();
-      if (wallet?.publicKey) {  // Add wallet check here
-        console.log('Canvas clicked with connected wallet');
-        handleFlap();
-      }
+      handleFlap();
     };
 
     canvas.addEventListener('click', handleCanvasClick);
@@ -173,21 +160,18 @@ const FlappyGame: React.FC = () => {
         cancelAnimationFrame(gameState.current.gameLoop);
       }
     };
-  }, [wallet]); // Add wallet to dependencies
+  }, []);
 
   // Handle keyboard
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.code === 'Space' && wallet?.publicKey) {  // Add wallet check
-        e.preventDefault();
-        console.log('Space pressed with connected wallet');
-        handleFlap();
-      }
+      e.preventDefault();
+      handleFlap();
     };
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [wallet]); // Add wallet to dependencies
+  }, []);
 
   // Update the scoring function
   const addScore = () => {
@@ -306,10 +290,10 @@ const FlappyGame: React.FC = () => {
   };
 
   const gameLoop = (timestamp: number) => {
-    console.log('Game loop running, gameStarted:', gameState.current.isStarted, 'wallet:', !!wallet?.publicKey);
+    console.log('Game loop running, gameStarted:', gameState.current.isStarted);
     
-    if (!gameState.current.isStarted || !wallet?.publicKey) {
-      console.log('Game not started or wallet not connected, stopping loop');
+    if (!gameState.current.isStarted) {
+      console.log('Game not started, stopping loop');
       return;
     }
 
@@ -681,20 +665,7 @@ const FlappyGame: React.FC = () => {
     });
 
     // Draw instructions or wallet message
-    if (!wallet?.publicKey) {
-      // Show wallet connection message
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-      ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-      ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 36px Arial';
-      ctx.textAlign = 'center';
-      ctx.shadowColor = '#000000';
-      ctx.shadowBlur = 8;
-      ctx.fillText('Connect Wallet to Play', GAME_WIDTH / 2, GAME_HEIGHT / 2);
-      ctx.font = 'bold 24px Arial';
-      ctx.fillText('You need $PUSSIO to play!', GAME_WIDTH / 2, GAME_HEIGHT / 2 + 40);
-      ctx.shadowBlur = 0;
-    } else if (!gameState.current.isStarted) {
+    if (!gameState.current.isStarted) {
       // Show regular start message
       ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
       ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
@@ -715,16 +686,13 @@ const FlappyGame: React.FC = () => {
       className="flappy-game-container" 
       tabIndex={0}
       onKeyDown={(e) => {
-        if (e.code === 'Space' && wallet?.publicKey) {
+        if (e.code === 'Space') {
           console.log('Space pressed on container');
           handleFlap(e);
         }
       }}
       onClick={(e) => {
-        if (wallet?.publicKey) {
-          console.log('Container clicked');
-          handleFlap(e);
-        }
+        handleFlap(e);
       }}
     >
       <canvas
