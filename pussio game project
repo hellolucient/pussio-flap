@@ -1,0 +1,107 @@
+# Pussio...or Not - Game Overview
+
+## Project Description
+A web-based voting game where players bet tokens on whether images are "PUSSIO" or "NOT A PUSSIO". Players stake tokens to vote, and winners share the prize pool based on their contribution to the winning side.
+
+## Core Features
+
+### Game Mechanics
+- 24-hour voting rounds
+- One image per round
+- Binary voting: "PUSSIO" or "NOT A PUSSIO"
+- Hidden results until round end
+- Minimum bet requirement per vote
+- Additional wagering options
+
+### Token Economics
+- Players use Abstract ETH to buy PUSSIO tokens
+- Prize pool distribution:
+  - 10% platform fee
+  - Of remaining 90%:
+    - 40% to highest contributor
+    - 30% to second highest
+    - 20% to third highest
+    - 10% to staked NFT holders
+
+### NFT Integration
+- NFT holders can stake their NFTs
+- Staked NFT holders share in 10% of prize pool distribution
+- No special voting privileges
+
+## Technical Stack
+
+### Frontend
+- Next.js 13+ with App Router
+- TypeScript
+- Tailwind CSS
+- Web3 wallet integration
+
+### Backend
+- Next.js API routes
+- PostgreSQL database
+- Abstract chain integration
+
+## Current Status
+- Initial Next.js project created with:
+  - TypeScript support
+  - Tailwind CSS
+  - ESLint
+  - src/ directory structure
+  - App Router enabled
+
+## Next Steps
+1. Set up basic layout and navigation
+2. Implement wallet connection
+3. Create game round interface
+4. Build voting mechanism
+5. Develop token management system
+6. Add staking functionality
+7. Integrate with Abstract chain
+
+## File Structure Overview
+
+pussio-game/
+├── src/
+│ ├── app/
+│ │ ├── layout.tsx
+│ │ ├── page.tsx
+│ │ ├── game/
+│ │ │ └── page.tsx
+│ │ └── staking/
+│ │ └── page.tsx
+│ ├── components/
+│ │ ├── common/
+│ │ │ ├── Header.tsx
+│ │ │ ├── Footer.tsx
+│ │ │ └── WalletConnect.tsx
+│ │ ├── game/
+│ │ │ ├── ImageDisplay.tsx
+│ │ │ ├── VoteButtons.tsx
+│ │ │ ├── RoundTimer.tsx
+│ │ │ └── PrizePool.tsx
+│ │ └── staking/
+│ │ ├── StakeForm.tsx
+│ │ └── StakeOverview.tsx
+│ ├── lib/
+│ │ ├── types/
+│ │ │ ├── game.ts
+│ │ │ └── staking.ts
+│ │ ├── hooks/
+│ │ │ ├── useWallet.ts
+│ │ │ ├── useGameRound.ts
+│ │ │ └── useStaking.ts
+│ │ └── utils/
+│ │ ├── abstract.ts
+│ │ ├── constants.ts
+│ │ └── helpers.ts
+│ ├── styles/
+│ │ └── globals.css
+│ └── config/
+│ └── abstract.ts
+├── prisma/
+│ └── schema.prisma
+├── public/
+│ └── images/
+├── .env
+├── package.json
+└── tsconfig.json

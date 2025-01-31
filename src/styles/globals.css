@@ -1,0 +1,216 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add any custom styles below */
+
+body {
+  background: linear-gradient(to bottom right, #0f172a, #1e1b4b);
+  min-height: 100vh;
+  color: white;
+}
+
+/* Optional: Add a subtle grain texture */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  z-index: -1;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1b4b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4f46e5;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6366f1;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Optional: Add some glow effects */
+.glow {
+  box-shadow: 0 0 20px theme('colors.pink.500/20'),
+              0 0 40px theme('colors.cyan.500/20');
+}
+
+/* Add to your existing animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Add beam animation */
+@keyframes beam {
+  0%, 100% {
+    opacity: 0.5;
+    height: 100%;
+  }
+  50% {
+    opacity: 0.7;
+    height: 95%;
+  }
+}
+
+.animate-beam {
+  animation: beam 2s ease-in-out infinite;
+}
+
+/* Add to your existing animations */
+@keyframes scan {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes scan-horizontal {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotateX(2deg);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0) rotateX(-2deg);
+  }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 0; }
+  5%, 95% { opacity: 0.1; }
+  10%, 90% { opacity: 0; }
+  15%, 85% { opacity: 0.3; }
+  20%, 80% { opacity: 0; }
+  25%, 75% { opacity: 0.2; }
+  30%, 70% { opacity: 0; }
+  35%, 65% { opacity: 0.1; }
+}
+
+.animate-scan {
+  animation: scan 2s linear infinite;
+}
+
+.animate-scan-horizontal {
+  animation: scan-horizontal 2s linear infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-flicker {
+  animation: flicker 0.5s linear infinite;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+@keyframes ping-slow {
+  75%, 100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(-50%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10px) translateX(-50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) translateX(-50%);
+  }
+}
+
+.animate-ping-slow {
+  animation: ping-slow 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animate-fade-up {
+  animation: fade-up 1s ease-out forwards;
+}
+
+@keyframes subtle-shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(1px, 1px) rotate(0.5deg); }
+  50% { transform: translate(-1px, -1px) rotate(-0.5deg); }
+  75% { transform: translate(-1px, 1px) rotate(0.25deg); }
+}
+
+.animate-subtle-shake {
+  animation: subtle-shake 3s infinite;
+}
+
+/* Add noise background */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    opacity: 0.2;
+    transform: scale(0.95);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.15);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+} 
